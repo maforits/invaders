@@ -20,7 +20,7 @@ func main() {
 
     http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 	//fmt.Fprintf(w, "🚀 Invaders Web\nEnvironment: %s\n", env)
-	fmt.Fprintf(w, "🚀 Invaders Web (Fork maforits)\nEnvironment: %s\n", env)
+	fmt.Fprintf(w, "🚀 Invaders Web (Fork 2 maforits)\nEnvironment: %s\n", env)
     })
 
     http.HandleFunc("/health", func(w http.ResponseWriter, r *http.Request) {
