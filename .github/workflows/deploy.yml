@@ -31,4 +31,3 @@ jobs:
           script: |
             ENV=${{ env.ENV }}
             /opt/apps/scripts/deploy.sh $ENV
-``
