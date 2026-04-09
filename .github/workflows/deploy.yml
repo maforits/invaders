@@ -1,0 +1,32 @@
+name: CI/CD Invaders
+
+on:
+  push:
+    branches:
+      - develop
+      - release
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Determinar ambiente
+        run: |
+          if [[ "${GITHUB_REF}" == "refs/heads/develop" ]]; then
+            echo "ENV=dev" >> $GITHUB_ENV
+          elif [[ "${GITHUB_REF}" == "refs/heads/release" ]]; then
+            echo "ENV=qa" >> $GITHUB_ENV
+          else
+            echo "ENV=prod" >> $GITHUB_ENV
+          fi
+
+      - name: Deploy en VM GCP
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.GCP_HOST }}
+          username: ${{ secrets.GCP_USER }}
+          key: ${{ secrets.GCP_SSH_KEY }}
+          script: |
+            /opt/apps/scripts/deploy.sh $ENV
