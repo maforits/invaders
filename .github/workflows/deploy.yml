@@ -29,4 +29,6 @@ jobs:
           username: ${{ secrets.GCP_USER }}
           key: ${{ secrets.GCP_SSH_KEY }}
           script: |
+            ENV=${{ env.ENV }}
             /opt/apps/scripts/deploy.sh $ENV
+``
